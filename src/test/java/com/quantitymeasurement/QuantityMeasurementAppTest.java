@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class QuantityMeasurementAppTest {
 
 	@Test
-	void testFeetEquqality_SameValue() {
+	void testFeetEquality_SameValue() {
 		QuantityMeasurementApp.Feet value1 = new QuantityMeasurementApp.Feet(1.0);
 		QuantityMeasurementApp.Feet value2 = new QuantityMeasurementApp.Feet(1.0);
 
@@ -17,7 +17,7 @@ class QuantityMeasurementAppTest {
 	}
 
 	@Test
-	void testFeetEquqality_DifferentValue() {
+	void testFeetEquality_DifferentValue() {
 		QuantityMeasurementApp.Feet value1 = new QuantityMeasurementApp.Feet(1.0);
 		QuantityMeasurementApp.Feet value2 = new QuantityMeasurementApp.Feet(2.0);
 
@@ -26,14 +26,14 @@ class QuantityMeasurementAppTest {
 	}
 
 	@Test
-	void testFeetEquqality_NullComparision() {
+	void testFeetEquality_NullComparision() {
 		QuantityMeasurementApp.Feet value1 = new QuantityMeasurementApp.Feet(2.0);
 
 		assertFalse(value1.equals(null), "Feet object should not be equal to null");
 	}
 
 	@Test
-	void testFeetEquqality_DifferentClass() {
+	void testFeetEquality_DifferentClass() {
 		QuantityMeasurementApp.Feet value1 = new QuantityMeasurementApp.Feet(2.0);
 
 		String nonFeet = "non feet";
@@ -42,10 +42,51 @@ class QuantityMeasurementAppTest {
 	}
 
 	@Test
-	void testFeetEquqality_SameReference() {
+	void testFeetEquality_SameReference() {
 		QuantityMeasurementApp.Feet value1 = new QuantityMeasurementApp.Feet(2.0);
 
 		assertTrue(value1.equals(value1), "Feet object should be equal to itself");
+
+	}
+
+	@Test
+	void testInchesEquality_SameValue() {
+		QuantityMeasurementApp.Inches value1 = new QuantityMeasurementApp.Inches(1.0);
+		QuantityMeasurementApp.Inches value2 = new QuantityMeasurementApp.Inches(1.0);
+
+		assertTrue(value1.equals(value2), "Inches objects with the same value should be equal");
+	}
+
+	@Test
+	void testInchesEquality_DifferentValue() {
+		QuantityMeasurementApp.Inches value1 = new QuantityMeasurementApp.Inches(1.0);
+		QuantityMeasurementApp.Inches value2 = new QuantityMeasurementApp.Inches(2.0);
+
+		assertFalse(value1.equals(value2), "Inches objects with the different value should not be equal");
+
+	}
+
+	@Test
+	void testInchesEquality_NullComparision() {
+		QuantityMeasurementApp.Inches value1 = new QuantityMeasurementApp.Inches(2.0);
+
+		assertFalse(value1.equals(null), "Inches object should not be equal to null");
+	}
+
+	@Test
+	void testInchesEquality_DifferentClass() {
+		QuantityMeasurementApp.Inches value1 = new QuantityMeasurementApp.Inches(2.0);
+
+		String nonInches = "non inches";
+
+		assertFalse(value1.equals(nonInches), "Inches object should not be equal to an object of different class");
+	}
+
+	@Test
+	void testInchesEquality_SameReference() {
+		QuantityMeasurementApp.Inches value1 = new QuantityMeasurementApp.Inches(2.0);
+
+		assertTrue(value1.equals(value1), "Inches object should be equal to itself");
 
 	}
 }
