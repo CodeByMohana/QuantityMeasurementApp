@@ -28,6 +28,33 @@ public class QuantityMeasurementApp {
 		return l1.add(l2);
 	}
 
+	public static boolean demonstrateWeightEquality(Weight weight1, Weight weight2) {
+		return weight1.equals(weight2);
+	}
+
+	public static boolean demonstrateWeightComparison(double value1, WeightUnit unit1, double value2,
+			WeightUnit unit2) {
+		Weight weight1 = new Weight(value1, unit1);
+		Weight weight2 = new Weight(value2, unit2);
+
+		return weight1.equals(weight2);
+
+	}
+
+	public static Weight demonstrateWeightConversion(double value, WeightUnit from, WeightUnit to) {
+		return new Weight(value, from).convertTo(to);
+
+	}
+
+	public static Weight demonstrateweightConversion(Weight weight, WeightUnit target) {
+
+		return weight.convertTo(target);
+	}
+
+	public static Weight demonstrateWeightAddition(Weight weight1, Weight weight2) {
+		return weight1.add(weight2);
+	}
+
 	public static void main(String[] args) {
 
 		System.out.println(new Length(1.0, LengthUnit.FEET).add(new Length(2.0, LengthUnit.FEET)));
@@ -45,6 +72,23 @@ public class QuantityMeasurementApp {
 		System.out.println(new Length(5.0, LengthUnit.FEET).add(new Length(0.0, LengthUnit.INCHES)));
 
 		System.out.println(new Length(5.0, LengthUnit.FEET).add(new Length(-2.0, LengthUnit.FEET)));
+
+		// Weight test cases
+		System.out.println(new Weight(1.0, WeightUnit.KILOGRAM).add(new Weight(2.0, WeightUnit.KILOGRAM)));
+
+		System.out.println(new Weight(1.0, WeightUnit.KILOGRAM).add(new Weight(1000.0, WeightUnit.GRAM)));
+
+		System.out.println(new Weight(1000.0, WeightUnit.GRAM).add(new Weight(1.0, WeightUnit.KILOGRAM)));
+
+		System.out.println(new Weight(1.0, WeightUnit.POUND).add(new Weight(16.0, WeightUnit.KILOGRAM)));
+
+		System.out.println(new Weight(16.0, WeightUnit.GRAM).add(new Weight(1.0, WeightUnit.POUND)));
+
+		System.out.println(new Weight(1000.0, WeightUnit.GRAM).add(new Weight(1.0, WeightUnit.KILOGRAM)));
+
+		System.out.println(new Weight(5.0, WeightUnit.KILOGRAM).add(new Weight(0.0, WeightUnit.GRAM)));
+
+		System.out.println(new Weight(5.0, WeightUnit.KILOGRAM).add(new Weight(-2.0, WeightUnit.KILOGRAM)));
 
 	}
 }

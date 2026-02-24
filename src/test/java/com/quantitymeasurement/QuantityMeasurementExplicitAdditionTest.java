@@ -7,7 +7,7 @@ import com.quantitymeasurement.QuantityMeasurementApp.LengthUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class QuantityMeasurementExplicitAdditionTest {
+class QuantityMeasurementExplicitAdditionTest {
 
 	private static final double EPSILON = 1e-12;
 
