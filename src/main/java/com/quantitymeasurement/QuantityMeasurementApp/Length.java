@@ -1,7 +1,5 @@
 package com.quantitymeasurement.QuantityMeasurementApp;
 
-import java.util.Objects;
-
 public class Length {
 	private double value;
 	private LengthUnit unit;
@@ -11,7 +9,7 @@ public class Length {
 
 		private final double conversionFactor;
 
-		LengthUnit(double conversionFactor) {
+		private LengthUnit(double conversionFactor) {
 			this.conversionFactor = conversionFactor;
 		}
 
@@ -21,6 +19,9 @@ public class Length {
 	}
 
 	public Length(double value, LengthUnit unit) {
+		if (Double.isNaN(value)) {
+			throw new IllegalArgumentException("Value must be numeric");
+		}
 		if (unit == null) {
 			throw new IllegalArgumentException("Unit cannot be null");
 		}
@@ -32,15 +33,13 @@ public class Length {
 		return value * unit.getConversionFactor();
 	}
 
-	private boolean compare(Length thatLength) {
-		double thisBaseValue = this.convertToBaseUnit();
-		double thatBaseValue = thatLength.convertToBaseUnit();
-		return Double.compare(thisBaseValue, thatBaseValue) == 0;
+	public boolean compare(Length thatLength) {
+		return this.equals(thatLength);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(convertToBaseUnit());
+		return Double.hashCode(convertToBaseUnit());
 	}
 
 	@Override
@@ -52,16 +51,15 @@ public class Length {
 		if (getClass() != obj.getClass())
 			return false;
 		Length other = (Length) obj;
-
-		double thisBaseValue = this.convertToBaseUnit();
-		double otherBaseValue = other.convertToBaseUnit();
-
-		return Math.abs(thisBaseValue - otherBaseValue) < 0.0001; // Using a small threshold for floating-point
-																	// comparison
+		return Double.compare(this.convertToBaseUnit(), other.convertToBaseUnit()) == 0;
 	}
 
-	@Override
-	public String toString() {
-		return value + " " + unit;
+	public static void main(String[] args) {
+		Length length1 = new Length(1.0, LengthUnit.FEET);
+		Length length2 = new Length(12.0, LengthUnit.INCHES);
+
+		System.out.println(length1.equals(length2));
+
 	}
+
 }
