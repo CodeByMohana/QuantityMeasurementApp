@@ -1,7 +1,5 @@
 package com.quantitymeasurement.QuantityMeasurementApp;
 
-import java.util.Objects;
-
 public class Length {
 	private double value;
 	private LengthUnit unit;
@@ -11,7 +9,7 @@ public class Length {
 
 		private final double conversionFactor;
 
-		LengthUnit(double conversionFactor) {
+		private LengthUnit(double conversionFactor) {
 			this.conversionFactor = conversionFactor;
 		}
 
@@ -21,6 +19,9 @@ public class Length {
 	}
 
 	public Length(double value, LengthUnit unit) {
+		if (Double.isNaN(value)) {
+			throw new IllegalArgumentException("Value must be numeric");
+		}
 		if (unit == null) {
 			throw new IllegalArgumentException("Unit cannot be null");
 		}
@@ -32,15 +33,13 @@ public class Length {
 		return value * unit.getConversionFactor();
 	}
 
-	private boolean compare(Length thatLength) {
-		double thisBaseValue = this.convertToBaseUnit();
-		double thatBaseValue = thatLength.convertToBaseUnit();
-		return Double.compare(thisBaseValue, thatBaseValue) == 0;
+	public boolean compare(Length thatLength) {
+		return this.equals(thatLength);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(convertToBaseUnit());
+		return Double.hashCode(convertToBaseUnit());
 	}
 
 	@Override
@@ -52,17 +51,50 @@ public class Length {
 		if (getClass() != obj.getClass())
 			return false;
 		Length other = (Length) obj;
+		return Double.compare(this.convertToBaseUnit(), other.convertToBaseUnit()) == 0;
+	}
 
-		double thisBaseValue = this.convertToBaseUnit();
-		double otherBaseValue = other.convertToBaseUnit();
+	public static double convert(double value, LengthUnit source, LengthUnit target) {
+		if (!Double.isFinite(value)) {
+			throw new IllegalArgumentException("Value must be finite");
+		}
 
-		return Math.abs(thisBaseValue - otherBaseValue) < 0.0001; // Using a small threshold for floating-point
-																	// comparison
+		if (source == null || target == null) {
+			throw new IllegalArgumentException("Units cannot be null");
+		}
+
+		double baseValue = value * source.getConversionFactor();
+
+		return baseValue / target.getConversionFactor();
+	}
+
+	public Length convertTo(LengthUnit target) {
+		double convertedValue = convert(this.value, this.unit, target);
+
+		return new Length(convertedValue, target);
 	}
 
 	@Override
 	public String toString() {
 		return value + " " + unit;
+	}
+
+	public static void main(String[] args) {
+		Length length1 = new Length(1.0, LengthUnit.FEET);
+		Length length2 = new Length(12.0, LengthUnit.INCHES);
+
+		System.out.println(length1.equals(length2));
+
+		Length length3 = new Length(1.0, LengthUnit.YARDS);
+		Length length4 = new Length(36.0, LengthUnit.INCHES);
+
+		System.out.println(length3.equals(length4));
+
+		Length length5 = new Length(100.0, LengthUnit.CENTIMETERS);
+		Length length6 = new Length(39.3701, LengthUnit.INCHES);
+
+		System.out.println(length5.equals(length6));
+
 	}
 
 }
