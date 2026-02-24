@@ -1,19 +1,11 @@
 package com.quantitymeasurement.QuantityMeasurementApp;
 
-import java.util.Objects;
-
 public class QuantityMeasurementApp {
-
 	public static class Feet {
 		private final double value;
 
-		// Constructor
 		public Feet(double value) {
 			this.value = value;
-		}
-
-		public double getValue() {
-			return value;
 		}
 
 		@Override
@@ -23,28 +15,28 @@ public class QuantityMeasurementApp {
 
 		@Override
 		public boolean equals(Object obj) {
+			// Check if both references point to the same object
 			if (this == obj)
 				return true;
-			if (obj == null)
+
+			// Check if the object is null or of different class
+			if (obj == null || getClass() != obj.getClass())
 				return false;
-			if (getClass() != obj.getClass())
-				return false;
+			;
+
+			// Safe casting
 			Feet other = (Feet) obj;
+
 			return Double.compare(this.value, other.value) == 0;
 		}
 
 	}
 
 	public static class Inches {
-		private final double value;
+		public final double value;
 
-		// Constructor
 		public Inches(double value) {
 			this.value = value;
-		}
-
-		public double getValue() {
-			return value;
 		}
 
 		@Override
@@ -63,24 +55,19 @@ public class QuantityMeasurementApp {
 			Inches other = (Inches) obj;
 			return Double.compare(this.value, other.value) == 0;
 		}
-	}
 
-	public static void demonstrateFeetEquality() {
-		Feet value1 = new Feet(1.0);
-		Feet value2 = new Feet(1.0);
-
-		System.out.println(value1.equals(value2)); // true
-	}
-
-	public static void demonstrateInchesEquality() {
-		Inches value1 = new Inches(1.0);
-		Inches value2 = new Inches(1.0);
-
-		System.out.println(value1.equals(value2)); // true
 	}
 
 	public static void main(String[] args) {
-		demonstrateFeetEquality();
-		demonstrateInchesEquality();
+		Feet feet1 = new Feet(1.0);
+		Feet feet2 = new Feet(1.0);
+
+		System.out.println(feet1.equals(feet2));
+
+		Inches inches1 = new Inches(1.0);
+		Inches inches2 = new Inches(1.0);
+
+		System.out.println(inches1.equals(inches2));
+
 	}
 }
