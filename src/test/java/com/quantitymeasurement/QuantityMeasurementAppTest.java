@@ -7,7 +7,7 @@ import com.quantitymeasurement.QuantityMeasurementApp.Length.LengthUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class QuantityMeasurementAppTest {
+class QuantityMeasurementAppTest {
 
 	// ================= SAME UNIT TESTS =================
 

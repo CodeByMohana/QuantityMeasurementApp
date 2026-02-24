@@ -83,42 +83,38 @@ public class Length {
 	}
 
 	public Length add(Length other) {
+		return add(other, this.unit);
+	}
+
+	public Length add(Length other, LengthUnit targetUnit) {
 		if (other == null) {
 			throw new IllegalArgumentException("Second operand cannot be null");
 		}
+
+		if (targetUnit == null)
+			throw new IllegalArgumentException("Target unit cannot be null");
 
 		if (!Double.isFinite(this.value) || !Double.isFinite(other.value)) {
 			throw new IllegalArgumentException("Values must be finite");
 		}
 
+		return addInternal(other, targetUnit);
+	}
+
+	private Length addInternal(Length other, LengthUnit targetUnit) {
+
+		// Convert both to base unit (inches)
 		double baseSum = this.convertToBaseUnit() + other.convertToBaseUnit();
 
-		double resetValue = baseSum / this.unit.getConversionFactor();
+		// Convert sum to target unit
+		double resultValue = baseSum / targetUnit.getConversionFactor();
 
-		return new Length(resetValue, this.unit);
+		return new Length(resultValue, targetUnit);
 	}
 
 	@Override
 	public String toString() {
 		return value + " " + unit;
-	}
-
-	public static void main(String[] args) {
-		Length length1 = new Length(1.0, LengthUnit.FEET);
-		Length length2 = new Length(12.0, LengthUnit.INCHES);
-
-		System.out.println(length1.equals(length2));
-
-		Length length3 = new Length(1.0, LengthUnit.YARDS);
-		Length length4 = new Length(36.0, LengthUnit.INCHES);
-
-		System.out.println(length3.equals(length4));
-
-		Length length5 = new Length(100.0, LengthUnit.CENTIMETERS);
-		Length length6 = new Length(39.3701, LengthUnit.INCHES);
-
-		System.out.println(length5.equals(length6));
-
 	}
 
 }
