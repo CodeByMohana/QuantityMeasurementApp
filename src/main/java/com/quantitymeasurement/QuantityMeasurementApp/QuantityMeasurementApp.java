@@ -1,7 +1,5 @@
 package com.quantitymeasurement.QuantityMeasurementApp;
 
-import com.quantitymeasurement.QuantityMeasurementApp.Length.LengthUnit;
-
 public class QuantityMeasurementApp {
 	public static boolean demonstrateLengthEquality(Length length1, Length length2) {
 		return length1.equals(length2);

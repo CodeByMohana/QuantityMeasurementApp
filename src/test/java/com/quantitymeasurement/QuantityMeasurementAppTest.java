@@ -3,11 +3,11 @@ package com.quantitymeasurement;
 import org.junit.jupiter.api.Test;
 
 import com.quantitymeasurement.QuantityMeasurementApp.Length;
-import com.quantitymeasurement.QuantityMeasurementApp.Length.LengthUnit;
+import com.quantitymeasurement.QuantityMeasurementApp.LengthUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class QuantityMeasurementAppTest {
+public class QuantityMeasurementAppTest {
 
 	// ================= SAME UNIT TESTS =================
 
@@ -410,7 +410,8 @@ class QuantityMeasurementAppTest {
 		Length result2 = b.add(a);
 
 		// Compare in base unit to avoid unit differences
-		assertEquals(result1.convertToBaseUnit(), result2.convertToBaseUnit(), EPSILON);
+		assertEquals(result1.getUnit().convertToBaseUnit(result1.getValue()),
+				result2.getUnit().convertToBaseUnit(result2.getValue()), EPSILON);
 	}
 
 	// ================= ZERO =================

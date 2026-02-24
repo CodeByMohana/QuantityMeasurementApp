@@ -3,13 +3,13 @@ package com.quantitymeasurement;
 import org.junit.jupiter.api.Test;
 
 import com.quantitymeasurement.QuantityMeasurementApp.Length;
-import com.quantitymeasurement.QuantityMeasurementApp.Length.LengthUnit;
+import com.quantitymeasurement.QuantityMeasurementApp.LengthUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class QuantityMeasurementExplicitAdditionTest {
+public class QuantityMeasurementExplicitAdditionTest {
 
-	private static final double EPSILON = 1e-6;
+	private static final double EPSILON = 1e-12;
 
 	@Test
 	void testAddition_ExplicitTargetUnit_Feet() {
