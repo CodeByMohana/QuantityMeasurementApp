@@ -26,37 +26,27 @@ public class QuantityMeasurementApp {
 		return length.convertTo(target);
 	}
 
+	public static Length demonstrateLengthAddition(Length l1, Length l2) {
+		return l1.add(l2);
+	}
+
 	public static void main(String[] args) {
 
-		// -------- Raw value conversion --------
-		Length result1 = demonstrateLengthConversion(1.0, Length.LengthUnit.FEET, Length.LengthUnit.INCHES);
+		System.out.println(new Length(1.0, LengthUnit.FEET).add(new Length(2.0, LengthUnit.FEET)));
 
-		System.out.println("1 FEET → INCHES = " + result1);
+		System.out.println(new Length(1.0, LengthUnit.FEET).add(new Length(12.0, LengthUnit.INCHES)));
 
-		Length result2 = demonstrateLengthConversion(3.0, Length.LengthUnit.YARDS, Length.LengthUnit.FEET);
+		System.out.println(new Length(12.0, LengthUnit.INCHES).add(new Length(1.0, LengthUnit.FEET)));
 
-		System.out.println("3 YARDS → FEET = " + result2);
+		System.out.println(new Length(1.0, LengthUnit.YARDS).add(new Length(3.0, LengthUnit.FEET)));
 
-		Length result3 = demonstrateLengthConversion(36.0, Length.LengthUnit.INCHES, Length.LengthUnit.YARDS);
+		System.out.println(new Length(36.0, LengthUnit.INCHES).add(new Length(1.0, LengthUnit.YARDS)));
 
-		System.out.println("36 INCHES → YARDS = " + result3);
+		System.out.println(new Length(2.54, LengthUnit.CENTIMETERS).add(new Length(1.0, LengthUnit.INCHES)));
 
-		Length result4 = demonstrateLengthConversion(1.0, Length.LengthUnit.CENTIMETERS, Length.LengthUnit.INCHES);
+		System.out.println(new Length(5.0, LengthUnit.FEET).add(new Length(0.0, LengthUnit.INCHES)));
 
-		System.out.println("1 CM → INCHES = " + result4);
-
-		// -------- Instance-based conversion --------
-		Length lengthInYards = new Length(2.0, Length.LengthUnit.YARDS);
-
-		Length converted = demonstrateLengthConversion(lengthInYards, Length.LengthUnit.INCHES);
-
-		System.out.println("2 YARDS → INCHES = " + converted);
-
-		// -------- Equality check --------
-		Length feet = new Length(3.0, Length.LengthUnit.FEET);
-		Length yard = new Length(1.0, Length.LengthUnit.YARDS);
-
-		System.out.println("3 FEET equals 1 YARD ? " + feet.equals(yard));
+		System.out.println(new Length(5.0, LengthUnit.FEET).add(new Length(-2.0, LengthUnit.FEET)));
 
 	}
 }
