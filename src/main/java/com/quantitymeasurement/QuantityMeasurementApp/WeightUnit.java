@@ -1,6 +1,6 @@
 package com.quantitymeasurement.QuantityMeasurementApp;
 
-public enum WeightUnit {
+public enum WeightUnit implements IMeasurable {
 	KILOGRAM(1.0), GRAM(0.001), POUND(0.453592);
 
 	private final double conversionFactor;
@@ -28,5 +28,10 @@ public enum WeightUnit {
 
 		System.out.println(kilograms + " kilograms is " + grams + " grams");
 
+	}
+
+	@Override
+	public String getUnitName() {
+		return name();
 	}
 }
