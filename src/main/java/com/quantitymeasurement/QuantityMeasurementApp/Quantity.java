@@ -191,7 +191,7 @@ public final class Quantity<U extends IMeasurable> {
 	 * issues.
 	 */
 	private double round(double value) {
-		return Math.round(value * 100.0) / 100.0;
+		return Math.round(value * 1000.0) / 1000.0;
 	}
 
 	/**
