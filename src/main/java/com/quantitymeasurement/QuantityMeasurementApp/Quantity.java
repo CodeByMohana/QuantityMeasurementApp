@@ -188,7 +188,7 @@ public final class Quantity<U extends IMeasurable> {
 		double otherBase = other.unit.convertToBaseUnit(other.value);
 
 		if (otherBase == 0) {
-			throw new IllegalArgumentException("Cannot divide by zero");
+			throw new ArithmeticException("Cannot divide by zero");
 		}
 
 		return round(thisBase / otherBase);
