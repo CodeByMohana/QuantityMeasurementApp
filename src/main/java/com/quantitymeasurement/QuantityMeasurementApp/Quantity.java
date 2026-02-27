@@ -130,6 +130,72 @@ public final class Quantity<U extends IMeasurable> {
 	}
 
 	// -------------------------
+	// Subtraction
+	// -------------------------
+
+	/**
+	 * Subtract's another quantity and returns result in this quantity's unit.
+	 */
+	public Quantity<U> subtract(Quantity<U> other) {
+		return subtract(other, this.unit);
+	}
+
+	/**
+	 * Subtract's another quantity and returns result in specified target unit.
+	 *
+	 * @param other      quantity to subtract
+	 * @param targetUnit unit in which result should be returned
+	 * @return new Quantity representing sum
+	 * @throws IllegalArgumentException if parameters are invalid
+	 */
+	public Quantity<U> subtract(Quantity<U> other, U targetUnit) {
+
+		if (other == null) {
+			throw new IllegalArgumentException("Other quantity cannot be null");
+		}
+
+		if (targetUnit == null) {
+			throw new IllegalArgumentException("Target Unit cannot be null");
+		}
+
+		// Ensure both quantities belong to same measurement category
+		ensureSameCategory(other);
+
+		// Convert both values to base unit before subtracting
+		double baseDifference = this.unit.convertToBaseUnit(this.value) - other.unit.convertToBaseUnit(other.value);
+
+		// Convert sum into target unit
+		double result = targetUnit.convertFromBaseUnit(baseDifference);
+
+		return new Quantity<>(round(result), targetUnit);
+	}
+
+	// -------------------------
+	// Division
+	// -------------------------
+
+	/**
+	 * Divides another quantity and returns result in this quantity's unit.
+	 */
+	public double divide(Quantity<U> other) {
+		if (other == null) {
+			throw new IllegalArgumentException("Other quantity cannot be null");
+		}
+
+		ensureSameCategory(other);
+
+		double thisBase = this.unit.convertToBaseUnit(this.value);
+		double otherBase = other.unit.convertToBaseUnit(other.value);
+
+		if (otherBase == 0) {
+			throw new IllegalArgumentException("Cannot divide by zero");
+		}
+
+		return round(thisBase / otherBase);
+
+	}
+
+	// -------------------------
 	// Equality
 	// -------------------------
 
