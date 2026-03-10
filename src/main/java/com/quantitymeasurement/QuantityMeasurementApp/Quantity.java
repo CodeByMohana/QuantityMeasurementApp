@@ -251,6 +251,8 @@ public final class Quantity<U extends IMeasurable> {
 	public Quantity<U> add(Quantity<U> other, U targetUnit) {
 
 		validateArithmeticOperands(other, targetUnit, true);
+		
+		this.unit.validateOperationSupport("ADD");
 
 		double baseSum = performBaseArithmetic(other, ArithmeticOperation.ADD);
 
@@ -281,6 +283,8 @@ public final class Quantity<U extends IMeasurable> {
 	public Quantity<U> subtract(Quantity<U> other, U targetUnit) {
 
 		validateArithmeticOperands(other, targetUnit, true);
+		
+		this.unit.validateOperationSupport("SUBTRACT");
 
 		double baseDifference = performBaseArithmetic(other, ArithmeticOperation.SUBTRACT);
 
@@ -299,6 +303,8 @@ public final class Quantity<U extends IMeasurable> {
 	public double divide(Quantity<U> other) {
 
 		validateArithmeticOperands(other, null, false);
+		
+		this.unit.validateOperationSupport("DIVIDE");
 
 		double result = performBaseArithmetic(other, ArithmeticOperation.DIVIDE);
 
