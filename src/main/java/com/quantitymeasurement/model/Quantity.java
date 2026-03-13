@@ -1,7 +1,9 @@
-package com.quantitymeasurement.QuantityMeasurementApp;
+package com.quantitymeasurement.model;
 
 import java.util.Objects;
 import java.util.function.DoubleBinaryOperator;
+
+import com.quantitymeasurement.units.IMeasurable;
 
 /**
  * Generic immutable Quantity class representing a measurable value.

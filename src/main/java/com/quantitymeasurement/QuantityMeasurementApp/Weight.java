@@ -1,5 +1,7 @@
 package com.quantitymeasurement.QuantityMeasurementApp;
 
+import com.quantitymeasurement.units.WeightUnit;
+
 /**
  * Represents a Weight quantity with a numerical value and a unit. Provides
  * functionality for comparison, conversion, and addition of weight values

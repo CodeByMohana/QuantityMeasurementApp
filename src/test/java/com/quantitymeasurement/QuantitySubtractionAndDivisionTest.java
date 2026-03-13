@@ -3,10 +3,10 @@ package com.quantitymeasurement;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
-import com.quantitymeasurement.QuantityMeasurementApp.LengthUnit;
-import com.quantitymeasurement.QuantityMeasurementApp.Quantity;
-import com.quantitymeasurement.QuantityMeasurementApp.VolumeUnit;
-import com.quantitymeasurement.QuantityMeasurementApp.WeightUnit;
+import com.quantitymeasurement.model.Quantity;
+import com.quantitymeasurement.units.LengthUnit;
+import com.quantitymeasurement.units.VolumeUnit;
+import com.quantitymeasurement.units.WeightUnit;
 
 class QuantitySubtractionAndDivisionTest {
 

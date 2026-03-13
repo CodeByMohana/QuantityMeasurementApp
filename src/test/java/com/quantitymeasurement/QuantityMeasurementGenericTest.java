@@ -2,10 +2,10 @@ package com.quantitymeasurement;
 
 import org.junit.jupiter.api.Test;
 
-import com.quantitymeasurement.QuantityMeasurementApp.IMeasurable;
-import com.quantitymeasurement.QuantityMeasurementApp.LengthUnit;
-import com.quantitymeasurement.QuantityMeasurementApp.Quantity;
-import com.quantitymeasurement.QuantityMeasurementApp.WeightUnit;
+import com.quantitymeasurement.model.Quantity;
+import com.quantitymeasurement.units.IMeasurable;
+import com.quantitymeasurement.units.LengthUnit;
+import com.quantitymeasurement.units.WeightUnit;
 
 import java.lang.reflect.Modifier;
 

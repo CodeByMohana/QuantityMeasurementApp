@@ -2,8 +2,8 @@ package com.quantitymeasurement;
 
 import org.junit.jupiter.api.Test;
 
-import com.quantitymeasurement.QuantityMeasurementApp.Quantity;
-import com.quantitymeasurement.QuantityMeasurementApp.VolumeUnit;
+import com.quantitymeasurement.model.Quantity;
+import com.quantitymeasurement.units.VolumeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 

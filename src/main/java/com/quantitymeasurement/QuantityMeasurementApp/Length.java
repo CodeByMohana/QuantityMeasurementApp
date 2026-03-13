@@ -1,5 +1,7 @@
 package com.quantitymeasurement.QuantityMeasurementApp;
 
+import com.quantitymeasurement.units.LengthUnit;
+
 /**
  * Represents a Length quantity with a numeric value and unit. Supports unit
  * conversion, addition, and equality comparison.
