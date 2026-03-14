@@ -3,7 +3,7 @@ package com.quantitymeasurement;
 import org.junit.jupiter.api.Test;
 
 import com.quantitymeasurement.QuantityMeasurementApp.Weight;
-import com.quantitymeasurement.units.WeightUnit;
+import com.quantitymeasurement.unit.WeightUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 

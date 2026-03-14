@@ -3,9 +3,9 @@ package com.quantitymeasurement;
 import org.junit.jupiter.api.Test;
 
 import com.quantitymeasurement.model.Quantity;
-import com.quantitymeasurement.units.IMeasurable;
-import com.quantitymeasurement.units.LengthUnit;
-import com.quantitymeasurement.units.WeightUnit;
+import com.quantitymeasurement.unit.IMeasurable;
+import com.quantitymeasurement.unit.LengthUnit;
+import com.quantitymeasurement.unit.WeightUnit;
 
 import java.lang.reflect.Modifier;
 

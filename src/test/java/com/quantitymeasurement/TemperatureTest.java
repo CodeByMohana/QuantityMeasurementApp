@@ -5,10 +5,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import com.quantitymeasurement.model.Quantity;
-import com.quantitymeasurement.units.LengthUnit;
-import com.quantitymeasurement.units.TemperatureUnit;
-import com.quantitymeasurement.units.VolumeUnit;
-import com.quantitymeasurement.units.WeightUnit;
+import com.quantitymeasurement.unit.LengthUnit;
+import com.quantitymeasurement.unit.TemperatureUnit;
+import com.quantitymeasurement.unit.VolumeUnit;
+import com.quantitymeasurement.unit.WeightUnit;
 
 class TemperatureTest {
 

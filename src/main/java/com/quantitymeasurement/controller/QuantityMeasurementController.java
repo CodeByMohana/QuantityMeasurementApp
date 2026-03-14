@@ -2,7 +2,7 @@ package com.quantitymeasurement.controller;
 
 import java.util.Scanner;
 
-import com.quantitymeasurement.dto.QuantityDTO;
+import com.quantitymeasurement.entity.QuantityDTO;
 import com.quantitymeasurement.service.IQuantityMeasurementService;
 
 public class QuantityMeasurementController {
@@ -19,10 +19,10 @@ public class QuantityMeasurementController {
 		double value = scanner.nextDouble();
 
 		System.out.print("Enter unit: ");
-		String unit = scanner.next();
+		String unit = scanner.next().toUpperCase();
 
 		System.out.print("Enter measurement type: ");
-		String type = scanner.next();
+		String type = scanner.next().toUpperCase();
 
 		QuantityDTO q1 = new QuantityDTO(value, unit, type);
 
@@ -34,7 +34,7 @@ public class QuantityMeasurementController {
 			double v2 = scanner.nextDouble();
 
 			System.out.print("Enter second unit: ");
-			String u2 = scanner.next();
+			String u2 = scanner.next().toUpperCase();
 
 			QuantityDTO q2 = new QuantityDTO(v2, u2, type);
 
@@ -46,7 +46,7 @@ public class QuantityMeasurementController {
 		case 2 -> {
 
 			System.out.print("Enter target unit: ");
-			String target = scanner.next();
+			String target = scanner.next().toUpperCase();
 
 			QuantityDTO result = service.convert(q1, target);
 
@@ -59,7 +59,7 @@ public class QuantityMeasurementController {
 			double v2 = scanner.nextDouble();
 
 			System.out.print("Enter second unit: ");
-			String u2 = scanner.next();
+			String u2 = scanner.next().toUpperCase();
 
 			QuantityDTO q2 = new QuantityDTO(v2, u2, type);
 
@@ -72,7 +72,7 @@ public class QuantityMeasurementController {
 			double v2 = scanner.nextDouble();
 
 			System.out.print("Enter second unit: ");
-			String u2 = scanner.next();
+			String u2 = scanner.next().toUpperCase();
 
 			QuantityDTO q2 = new QuantityDTO(v2, u2, type);
 
@@ -85,7 +85,7 @@ public class QuantityMeasurementController {
 			double v2 = scanner.nextDouble();
 
 			System.out.print("Enter second unit: ");
-			String u2 = scanner.next();
+			String u2 = scanner.next().toUpperCase();
 
 			QuantityDTO q2 = new QuantityDTO(v2, u2, type);
 

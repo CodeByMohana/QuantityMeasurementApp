@@ -1,4 +1,4 @@
-package com.quantitymeasurement.units;
+package com.quantitymeasurement.unit;
 
 import java.util.function.Function;
 

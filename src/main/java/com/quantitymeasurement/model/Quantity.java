@@ -3,7 +3,7 @@ package com.quantitymeasurement.model;
 import java.util.Objects;
 import java.util.function.DoubleBinaryOperator;
 
-import com.quantitymeasurement.units.IMeasurable;
+import com.quantitymeasurement.unit.IMeasurable;
 
 /**
  * Generic immutable Quantity class representing a measurable value.

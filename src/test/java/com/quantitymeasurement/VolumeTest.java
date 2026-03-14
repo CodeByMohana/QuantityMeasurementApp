@@ -3,7 +3,7 @@ package com.quantitymeasurement;
 import org.junit.jupiter.api.Test;
 
 import com.quantitymeasurement.model.Quantity;
-import com.quantitymeasurement.units.VolumeUnit;
+import com.quantitymeasurement.unit.VolumeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 

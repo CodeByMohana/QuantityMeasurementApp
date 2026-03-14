@@ -3,41 +3,45 @@ package com.quantitymeasurement.app;
 import java.util.Scanner;
 
 import com.quantitymeasurement.controller.QuantityMeasurementController;
+import com.quantitymeasurement.repository.IQuantityMeasurementRepository;
 import com.quantitymeasurement.repository.QuantityMeasurementCacheRepository;
+import com.quantitymeasurement.repository.QuantityMeasurementDatabaseRepository;
+import com.quantitymeasurement.service.IQuantityMeasurementService;
 import com.quantitymeasurement.service.QuantityMeasurementServiceImpl;
+import com.quantitymeasurement.util.DatabaseInitializer;
 
 public class QuantityMeasurementApp {
 
-    public static void main(String[] args) {
+	public static void main(String[] args) {
 
-        QuantityMeasurementCacheRepository repository =
-                QuantityMeasurementCacheRepository.getInstance();
+		DatabaseInitializer.initializeDatabase();
 
-        QuantityMeasurementServiceImpl service =
-                new QuantityMeasurementServiceImpl(repository);
+		IQuantityMeasurementRepository repository = new QuantityMeasurementDatabaseRepository();
 
-        QuantityMeasurementController controller =
-                new QuantityMeasurementController(service);
+		IQuantityMeasurementService service = new QuantityMeasurementServiceImpl(repository);
 
-        Scanner scanner = new Scanner(System.in);
+		QuantityMeasurementController controller = new QuantityMeasurementController(service);
 
-        while (true) {
+		Scanner scanner = new Scanner(System.in);
 
-            System.out.println("\nSelect Operation:");
-            System.out.println("1. Compare");
-            System.out.println("2. Convert");
-            System.out.println("3. Add");
-            System.out.println("4. Subtract");
-            System.out.println("5. Divide");
-            System.out.println("6. Exit");
+		while (true) {
 
-            int choice = scanner.nextInt();
+			System.out.println("\nSelect Operation:");
+			System.out.println("1. Compare");
+			System.out.println("2. Convert");
+			System.out.println("3. Add");
+			System.out.println("4. Subtract");
+			System.out.println("5. Divide");
+			System.out.println("6. Exit");
 
-            if (choice == 6) break;
+			int choice = scanner.nextInt();
 
-            controller.handleUserOperation(choice, scanner);
-        }
+			if (choice == 6)
+				break;
 
-        scanner.close();
-    }
+			controller.handleUserOperation(choice, scanner);
+		}
+
+		scanner.close();
+	}
 }
