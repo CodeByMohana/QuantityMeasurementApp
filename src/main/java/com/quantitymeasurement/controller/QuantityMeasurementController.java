@@ -2,7 +2,7 @@ package com.quantitymeasurement.controller;
 
 import java.util.Scanner;
 
-import com.quantitymeasurement.entity.QuantityDTO;
+import com.quantitymeasurement.dto.QuantityDTO;
 import com.quantitymeasurement.service.IQuantityMeasurementService;
 
 public class QuantityMeasurementController {
