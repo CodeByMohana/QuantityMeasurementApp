@@ -1,6 +1,4 @@
-package com.app.quantitymeasurement.controller;
-
-import com.app.quantitymeasurement.entity.QuantityDTO;
+package com.app.quantitymeasurement.dto;
 
 import lombok.Getter;
 import lombok.Setter;

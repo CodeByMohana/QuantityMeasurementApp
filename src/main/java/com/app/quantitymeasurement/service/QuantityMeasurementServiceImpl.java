@@ -2,9 +2,8 @@ package com.app.quantitymeasurement.service;
 
 import org.springframework.stereotype.Service;
 
-import com.app.quantitymeasurement.entity.QuantityDTO;
+import com.app.quantitymeasurement.dto.QuantityDTO;
 import com.app.quantitymeasurement.entity.QuantityMeasurementEntity;
-import com.app.quantitymeasurement.entity.model.domain.Quantity;
 import com.app.quantitymeasurement.repository.QuantityMeasurementRepository;
 import com.app.quantitymeasurement.unit.*;
 

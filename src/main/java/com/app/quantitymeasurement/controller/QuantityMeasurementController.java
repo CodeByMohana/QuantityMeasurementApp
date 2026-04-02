@@ -3,7 +3,9 @@ package com.app.quantitymeasurement.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.app.quantitymeasurement.entity.QuantityDTO;
+import com.app.quantitymeasurement.dto.CompareRequest;
+import com.app.quantitymeasurement.dto.ConvertRequest;
+import com.app.quantitymeasurement.dto.QuantityDTO;
 import com.app.quantitymeasurement.service.IQuantityMeasurementService;
 
 import jakarta.validation.Valid;
