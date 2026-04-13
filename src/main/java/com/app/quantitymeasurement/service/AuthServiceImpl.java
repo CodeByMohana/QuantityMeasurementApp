@@ -24,27 +24,28 @@ public class AuthServiceImpl implements AuthService {
 	@Override
 	public void register(RegisterRequestDTO request) {
 
-		if (userRepository.findByUsername(request.getUsername()).isPresent()) {
+		if (userRepository.findByEmail(request.getEmail()).isPresent()) {
 			throw new RuntimeException("User already exists");
 		}
 
 		UserEntity user = new UserEntity();
 		user.setUsername(request.getUsername());
+		user.setEmail(request.getEmail());
 		user.setPassword(passwordEncoder.encode(request.getPassword()));
-
+		user.setProvider("LOCAL");
 		userRepository.save(user);
 	}
 
 	@Override
 	public String login(AuthRequestDTO request) {
 
-		UserEntity user = userRepository.findByUsername(request.getUsername())
+		UserEntity user = userRepository.findByEmail(request.getEmail())
 				.orElseThrow(() -> new RuntimeException("User not found"));
 
 		if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
 			throw new RuntimeException("Invalid credentials");
 		}
 
-		return jwtUtil.generateToken(user.getUsername());
+		return jwtUtil.generateToken(user.getEmail());
 	}
 }

@@ -5,6 +5,10 @@ import org.springframework.web.bind.annotation.*;
 import com.app.quantitymeasurement.dto.*;
 import com.app.quantitymeasurement.service.AuthService;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletResponse;
+
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -22,8 +26,31 @@ public class AuthController {
 	}
 
 	@PostMapping("/login")
-	public AuthResponseDTO login(@RequestBody AuthRequestDTO request) {
+	public String login(@RequestBody AuthRequestDTO request, HttpServletResponse response) {
 		String token = authService.login(request);
-		return new AuthResponseDTO(token);
+
+		Cookie cookie = new Cookie("jwt", token);
+
+		cookie.setHttpOnly(true);
+		cookie.setSecure(false); // true in production
+		cookie.setPath("/");
+		cookie.setMaxAge(24 * 60 * 60);
+		response.addCookie(cookie);
+
+		return "Logged In successfully";
+	}
+
+	@PostMapping("/logout")
+	public String logout(HttpServletResponse response) {
+
+		Cookie cookie = new Cookie("jwt", null);
+
+		cookie.setHttpOnly(true);
+		cookie.setSecure(false);
+		cookie.setPath("/");
+		cookie.setMaxAge(0);
+		response.addCookie(cookie);
+
+		return "Logged Out successfully";
 	}
 }
