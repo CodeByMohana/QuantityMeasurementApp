@@ -14,4 +14,6 @@ public interface IQuantityMeasurementService {
 
 	double divide(QuantityDTO q1, QuantityDTO q2);
 
+	java.util.List<com.app.quantitymeasurement.entity.QuantityMeasurementEntity> getHistory();
+
 }

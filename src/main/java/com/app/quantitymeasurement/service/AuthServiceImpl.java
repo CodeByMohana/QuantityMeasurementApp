@@ -42,6 +42,10 @@ public class AuthServiceImpl implements AuthService {
 		UserEntity user = userRepository.findByEmail(request.getEmail())
 				.orElseThrow(() -> new RuntimeException("User not found"));
 
+		if (!"LOCAL".equals(user.getProvider())) {
+			throw new RuntimeException("Please login with " + user.getProvider());
+		}
+
 		if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
 			throw new RuntimeException("Invalid credentials");
 		}

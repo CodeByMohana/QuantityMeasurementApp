@@ -24,6 +24,12 @@ public class JwtFilter extends OncePerRequestFilter {
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
+		String path = request.getServletPath();
+
+		if (!path.startsWith("/api")) {
+			filterChain.doFilter(request, response);
+			return;
+		}
 
 		String token = null;
 
@@ -41,18 +47,14 @@ public class JwtFilter extends OncePerRequestFilter {
 					break;
 				}
 			}
+		}
 
-			if (token != null && jwtUtil.validate(token)) {
-
-				String username = jwtUtil.extractUsername(token);
-
-				System.out.println("JWT USER: " + username);
-
-				UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(username, null,
-						new ArrayList<>());
-
-				SecurityContextHolder.getContext().setAuthentication(auth);
-			}
+		if (token != null && jwtUtil.validate(token)) {
+			String username = jwtUtil.extractUsername(token);
+			System.out.println("JWT USER: " + username);
+			UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(username, null,
+					new ArrayList<>());
+			SecurityContextHolder.getContext().setAuthentication(auth);
 		}
 
 		filterChain.doFilter(request, response);

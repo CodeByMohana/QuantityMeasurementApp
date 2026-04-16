@@ -11,9 +11,11 @@ import com.app.quantitymeasurement.unit.*;
 public class QuantityMeasurementServiceImpl implements IQuantityMeasurementService {
 
 	private final QuantityMeasurementRepository repository;
+	private final com.app.quantitymeasurement.repository.UserRepository userRepository;
 
-	public QuantityMeasurementServiceImpl(QuantityMeasurementRepository repository) {
+	public QuantityMeasurementServiceImpl(QuantityMeasurementRepository repository, com.app.quantitymeasurement.repository.UserRepository userRepository) {
 		this.repository = repository;
+		this.userRepository = userRepository;
 	}
 
 	// ---------------------------
@@ -120,6 +122,14 @@ public class QuantityMeasurementServiceImpl implements IQuantityMeasurementServi
 	}
 
 	// ---------------------------
+	// HISTORY
+	// ---------------------------
+	@Override
+	public java.util.List<QuantityMeasurementEntity> getHistory() {
+		return repository.findByUserId(getCurrentUserId());
+	}
+
+	// ---------------------------
 	// SAVE TO DATABASE
 	// ---------------------------
 	private void saveEntity(String operation, QuantityDTO q1, QuantityDTO q2, Double resultValue, String resultUnit) {
@@ -127,8 +137,17 @@ public class QuantityMeasurementServiceImpl implements IQuantityMeasurementServi
 		QuantityMeasurementEntity entity = QuantityMeasurementEntity.builder().operationType(operation)
 				.measurementType(q1.getMeasurementType()).operand1Value(q1.getValue()).operand1Unit(q1.getUnit())
 				.operand2Value(q2 != null ? q2.getValue() : null).operand2Unit(q2 != null ? q2.getUnit() : null)
-				.resultValue(resultValue).resultUnit(resultUnit).build();
+				.resultValue(resultValue).resultUnit(resultUnit)
+				.userId(getCurrentUserId()).build();
 
 		repository.save(entity);
+	}
+
+	private Long getCurrentUserId() {
+		org.springframework.security.core.Authentication auth = org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication();
+		if (auth == null || !auth.isAuthenticated() || "anonymousUser".equals(auth.getPrincipal())) {
+			return null;
+		}
+		return userRepository.findByEmail(auth.getName()).map(com.app.quantitymeasurement.entity.UserEntity::getId).orElse(null);
 	}
 }

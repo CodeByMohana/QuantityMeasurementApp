@@ -1,0 +1,198 @@
+<div style="max-width: 800px; margin: 0 auto;">
+  <h1 style="font-weight: 500; margin-bottom: 20px;">Measure & Calculate</h1>
+
+  <mat-card style="border-radius: 16px;">
+    <mat-tab-group animationDuration="0ms" class="p-3">
+      
+      <!-- CONVERT TAB -->
+      <mat-tab label="Convert">
+        <div style="padding: 30px 20px;">
+          <form [formGroup]="convertForm" (ngSubmit)="doConvert()">
+            
+            <mat-form-field appearance="outline" style="width: 100%; margin-bottom: 15px;">
+              <mat-label>Measurement Type</mat-label>
+              <mat-select formControlName="measurementType">
+                <mat-option *ngFor="let type of measurementTypes" [value]="type">{{ type }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+              <mat-form-field appearance="outline" style="flex: 1; min-width: 200px;">
+                <mat-label>Value</mat-label>
+                <input matInput type="number" formControlName="value">
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" style="flex: 1; min-width: 200px;">
+                <mat-label>From Unit</mat-label>
+                <mat-select formControlName="fromUnit">
+                  <mat-option *ngFor="let u of convertUnits" [value]="u">{{ u }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <div style="display: flex; align-items: center; justify-content: center; padding: 0 10px;">
+                <mat-icon color="primary" style="font-size: 32px; height: 32px; width: 32px; opacity: 0.6;">arrow_forward</mat-icon>
+              </div>
+
+              <mat-form-field appearance="outline" style="flex: 1; min-width: 200px;">
+                <mat-label>To Unit</mat-label>
+                <mat-select formControlName="toUnit">
+                  <mat-option *ngFor="let u of convertUnits" [value]="u">{{ u }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <button mat-flat-button color="primary" type="submit" [disabled]="convertForm.invalid || loading" style="width: 100%; padding: 24px; font-size: 16px; margin-top: 20px;">
+              <span *ngIf="!loading">Convert</span>
+              <mat-spinner *ngIf="loading" diameter="20" style="margin: 0 auto;"></mat-spinner>
+            </button>
+          </form>
+
+          <!-- RESULT -->
+          <div *ngIf="convertResult" style="margin-top: 30px; text-align: center; padding: 20px; background: rgba(79,70,229,0.05); border-radius: 12px; border: 1px bordered var(--border);">
+            <p style="color: var(--text-secondary); margin: 0;">Conversion Result</p>
+            <h2 style="font-size: 32px; color: var(--primary); margin: 10px 0 0;">
+              {{ convertResult.value | number:'1.2-4' }} <span style="font-size: 20px; opacity: 0.7;">{{ convertResult.unit }}</span>
+            </h2>
+          </div>
+        </div>
+      </mat-tab>
+
+      <!-- COMPARE TAB -->
+      <mat-tab label="Compare">
+        <div style="padding: 30px 20px;">
+          <form [formGroup]="compareForm" (ngSubmit)="doCompare()">
+            
+            <mat-form-field appearance="outline" style="width: 100%; margin-bottom: 15px;">
+              <mat-label>Measurement Type</mat-label>
+              <mat-select formControlName="measurementType">
+                <mat-option *ngFor="let type of measurementTypes" [value]="type">{{ type }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <div style="display: flex; gap: 20px; flex-direction: column;">
+              
+              <!-- First Quantity -->
+              <div style="display: flex; gap: 15px; align-items: center; padding: 15px; border: 1px solid var(--border); border-radius: 8px;">
+                <div style="flex-shrink: 0; font-weight: bold; width: 30px;">Q1</div>
+                <mat-form-field appearance="outline" style="flex: 1; margin-bottom: -1.25em;">
+                  <mat-label>Value</mat-label>
+                  <input matInput type="number" formControlName="value1">
+                </mat-form-field>
+                <mat-form-field appearance="outline" style="flex: 1; margin-bottom: -1.25em;">
+                  <mat-label>Unit</mat-label>
+                  <mat-select formControlName="unit1">
+                    <mat-option *ngFor="let u of compareUnits" [value]="u">{{ u }}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <!-- Second Quantity -->
+              <div style="display: flex; gap: 15px; align-items: center; padding: 15px; border: 1px solid var(--border); border-radius: 8px;">
+                <div style="flex-shrink: 0; font-weight: bold; width: 30px;">Q2</div>
+                <mat-form-field appearance="outline" style="flex: 1; margin-bottom: -1.25em;">
+                  <mat-label>Value</mat-label>
+                  <input matInput type="number" formControlName="value2">
+                </mat-form-field>
+                <mat-form-field appearance="outline" style="flex: 1; margin-bottom: -1.25em;">
+                  <mat-label>Unit</mat-label>
+                  <mat-select formControlName="unit2">
+                    <mat-option *ngFor="let u of compareUnits" [value]="u">{{ u }}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+            </div>
+
+            <button mat-flat-button color="accent" type="submit" [disabled]="compareForm.invalid || loading" style="width: 100%; padding: 24px; font-size: 16px; margin-top: 20px;">
+              <span *ngIf="!loading">Compare Quantities</span>
+              <mat-spinner *ngIf="loading" diameter="20" style="margin: 0 auto;"></mat-spinner>
+            </button>
+          </form>
+
+          <!-- RESULT -->
+          <div *ngIf="compareResult !== null" style="margin-top: 30px; text-align: center; padding: 20px; border-radius: 12px; font-size: 20px;" 
+               [ngStyle]="{'background': compareResult ? 'rgba(76, 175, 80, 0.1)' : 'rgba(244, 67, 54, 0.1)', 'color': compareResult ? '#4CAF50' : '#F44336'}">
+            <mat-icon style="vertical-align: middle; margin-right: 8px;">{{ compareResult ? 'check_circle' : 'cancel' }}</mat-icon>
+            <span style="vertical-align: middle; font-weight: 500;">
+              The quantities are {{ compareResult ? 'EQUAL' : 'NOT EQUAL' }}
+            </span>
+          </div>
+        </div>
+      </mat-tab>
+
+      <!-- ARITHMETIC TAB -->
+      <mat-tab label="Arithmetic">
+        <div style="padding: 30px 20px;">
+          <form [formGroup]="arithmeticForm" (ngSubmit)="doArithmetic()">
+            
+            <div style="display: flex; gap: 15px;">
+              <mat-form-field appearance="outline" style="flex: 2; margin-bottom: 15px;">
+                <mat-label>Measurement Type</mat-label>
+                <mat-select formControlName="measurementType">
+                  <mat-option *ngFor="let type of measurementTypes" [value]="type">{{ type }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" style="flex: 1; margin-bottom: 15px;">
+                <mat-label>Operation</mat-label>
+                <mat-select formControlName="operation">
+                  <mat-option value="add">Add</mat-option>
+                  <mat-option value="subtract">Subtract</mat-option>
+                  <mat-option value="divide">Divide</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div style="display: flex; gap: 20px; flex-direction: column;">
+              
+              <!-- First Quantity -->
+              <div style="display: flex; gap: 15px; align-items: center; padding: 15px; border: 1px solid var(--border); border-radius: 8px;">
+                <div style="flex-shrink: 0; font-weight: bold; width: 30px;">Q1</div>
+                <mat-form-field appearance="outline" style="flex: 1; margin-bottom: -1.25em;">
+                  <mat-label>Value</mat-label>
+                  <input matInput type="number" formControlName="value1">
+                </mat-form-field>
+                <mat-form-field appearance="outline" style="flex: 1; margin-bottom: -1.25em;">
+                  <mat-label>Unit</mat-label>
+                  <mat-select formControlName="unit1">
+                    <mat-option *ngFor="let u of arithmeticUnits" [value]="u">{{ u }}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <!-- Second Quantity -->
+              <div style="display: flex; gap: 15px; align-items: center; padding: 15px; border: 1px solid var(--border); border-radius: 8px;">
+                <div style="flex-shrink: 0; font-weight: bold; width: 30px;">Q2</div>
+                <mat-form-field appearance="outline" style="flex: 1; margin-bottom: -1.25em;">
+                  <mat-label>Value</mat-label>
+                  <input matInput type="number" formControlName="value2">
+                </mat-form-field>
+                <mat-form-field appearance="outline" style="flex: 1; margin-bottom: -1.25em;">
+                  <mat-label>Unit</mat-label>
+                  <mat-select formControlName="unit2">
+                    <mat-option *ngFor="let u of arithmeticUnits" [value]="u">{{ u }}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+            </div>
+
+            <button mat-flat-button color="primary" type="submit" [disabled]="arithmeticForm.invalid || loading" style="width: 100%; padding: 24px; font-size: 16px; margin-top: 20px; background: #10b981;">
+              <span *ngIf="!loading">Calculate</span>
+              <mat-spinner *ngIf="loading" diameter="20" style="margin: 0 auto;"></mat-spinner>
+            </button>
+          </form>
+
+          <!-- RESULT -->
+          <div *ngIf="arithmeticResult" style="margin-top: 30px; text-align: center; padding: 20px; background: rgba(16, 185, 129, 0.1); border-radius: 12px; border: 1px bordered #10b981;">
+            <p style="color: var(--text-secondary); margin: 0;">Calculated Value</p>
+            <h2 style="font-size: 32px; color: #10b981; margin: 10px 0 0;">
+              {{ arithmeticResult.value | number:'1.2-4' }} <span style="font-size: 20px; opacity: 0.7;">{{ arithmeticResult.unit }}</span>
+            </h2>
+          </div>
+        </div>
+      </mat-tab>
+
+    </mat-tab-group>
+  </mat-card>
+</div>

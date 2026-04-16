@@ -44,15 +44,7 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 
 		String token = jwtUtil.generateToken(user.getEmail());
 
-		Cookie cookie = new Cookie("jwt", token);
-		cookie.setHttpOnly(true);
-		cookie.setSecure(false);
-		cookie.setPath("/");
-		cookie.setMaxAge(24 * 60 * 60);
-
-		response.addCookie(cookie);
-
-		response.sendRedirect("http://localhost:3000/home");
+		response.sendRedirect("http://54.206.167.226:8080/auth/callback?token=" + token);
 	}
 
 }

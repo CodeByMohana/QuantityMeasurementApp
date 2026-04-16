@@ -74,4 +74,12 @@ public class QuantityMeasurementController {
 
 		return ResponseEntity.ok(result);
 	}
+
+	// ---------------------------
+	// HISTORY
+	// ---------------------------
+	@GetMapping("/history")
+	public ResponseEntity<java.util.List<com.app.quantitymeasurement.entity.QuantityMeasurementEntity>> getHistory() {
+		return ResponseEntity.ok(service.getHistory());
+	}
 }

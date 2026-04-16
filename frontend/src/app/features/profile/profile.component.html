@@ -1,0 +1,33 @@
+<div style="max-width: 600px; margin: 0 auto; padding-top: 40px;">
+  
+  <mat-card style="border-radius: 16px;">
+    <mat-card-header style="display: flex; flex-direction: column; align-items: center; padding-top: 30px;">
+      
+      <div style="width: 100px; height: 100px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-size: 40px; margin-bottom: 20px;">
+        {{ username.charAt(0) | uppercase }}
+      </div>
+      
+      <mat-card-title style="font-size: 28px; font-weight: bold;">{{ username }}</mat-card-title>
+      <mat-card-subtitle style="font-size: 16px; margin-top: 5px;">Authenticated User</mat-card-subtitle>
+      
+    </mat-card-header>
+
+    <mat-card-content style="padding: 40px;">
+      
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 15px; background: var(--background); border-radius: 8px;">
+          <span style="color: var(--text-secondary); font-weight: 500;">Account Role</span>
+          <span style="font-weight: bold; padding: 5px 15px; border-radius: 20px; background: rgba(79, 70, 229, 0.1); color: var(--primary);">User</span>
+        </div>
+
+      </div>
+
+      <button mat-stroked-button color="warn" (click)="logout()" style="width: 100%; margin-top: 40px; padding: 24px; font-size: 16px;">
+        <mat-icon>logout</mat-icon> Logout Session
+      </button>
+
+    </mat-card-content>
+  </mat-card>
+
+</div>

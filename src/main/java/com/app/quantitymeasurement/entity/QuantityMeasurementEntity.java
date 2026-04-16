@@ -24,6 +24,9 @@ public class QuantityMeasurementEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Column(name = "user_id")
+	private Long userId;
+
 	// Operation: ADD, SUBTRACT, DIVIDE, COMPARE, CONVERT
 	@Column(name = "operation_type", nullable = false)
 	private String operationType;

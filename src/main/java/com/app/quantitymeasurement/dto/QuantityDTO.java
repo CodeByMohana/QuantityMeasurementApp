@@ -13,7 +13,6 @@ import lombok.*;
 public class QuantityDTO {
 
     @NotNull(message = "Value cannot be null")
-    @Positive(message = "Value must be positive")
     private Double value;
 
     @NotBlank(message = "Unit cannot be empty")

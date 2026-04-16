@@ -24,4 +24,7 @@ public interface QuantityMeasurementRepository extends JpaRepository<QuantityMea
 
 	// 🔍 Combined filter
 	List<QuantityMeasurementEntity> findByOperationTypeAndMeasurementType(String operationType, String measurementType);
+
+	// 🔍 Find by User ID
+	List<QuantityMeasurementEntity> findByUserId(Long userId);
 }

@@ -5,12 +5,11 @@ import org.springframework.web.bind.annotation.*;
 import com.app.quantitymeasurement.dto.*;
 import com.app.quantitymeasurement.service.AuthService;
 
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.http.ResponseEntity;
+import java.util.Map;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 public class AuthController {
 
 	private final AuthService authService;
@@ -19,38 +18,26 @@ public class AuthController {
 		this.authService = authService;
 	}
 
-	@PostMapping("/register")
-	public String register(@RequestBody RegisterRequestDTO request) {
+	@PostMapping(value = {"/register", "/signup"})
+	public ResponseEntity<Map<String, String>> register(@RequestBody RegisterRequestDTO request) {
 		authService.register(request);
-		return "User Registered Successfully";
+		return ResponseEntity.ok(Map.of("message", "User Registered Successfully"));
 	}
 
 	@PostMapping("/login")
-	public String login(@RequestBody AuthRequestDTO request, HttpServletResponse response) {
+	public ResponseEntity<AuthResponseDTO> login(@RequestBody AuthRequestDTO request) {
 		String token = authService.login(request);
-
-		Cookie cookie = new Cookie("jwt", token);
-
-		cookie.setHttpOnly(true);
-		cookie.setSecure(false); // true in production
-		cookie.setPath("/");
-		cookie.setMaxAge(24 * 60 * 60);
-		response.addCookie(cookie);
-
-		return "Logged In successfully";
+		return ResponseEntity.ok(new AuthResponseDTO(token));
 	}
 
 	@PostMapping("/logout")
-	public String logout(HttpServletResponse response) {
+	public ResponseEntity<Map<String, String>> logout() {
+		return ResponseEntity.ok(Map.of("message", "Logged Out successfully"));
+	}
 
-		Cookie cookie = new Cookie("jwt", null);
-
-		cookie.setHttpOnly(true);
-		cookie.setSecure(false);
-		cookie.setPath("/");
-		cookie.setMaxAge(0);
-		response.addCookie(cookie);
-
-		return "Logged Out successfully";
+	@GetMapping("/profile")
+	public ResponseEntity<Map<String, String>> profile() {
+		org.springframework.security.core.Authentication auth = org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication();
+		return ResponseEntity.ok(Map.of("username", auth.getName()));
 	}
 }
