@@ -12,7 +12,7 @@ export class AuthService {
   private loggedIn = new BehaviorSubject<boolean>(this.hasToken());
   public isLoggedIn$ = this.loggedIn.asObservable();
   
-  private apiUrl = 'http://54.206.167.226:8080/api/auth';
+  private apiUrl = 'http://15.135.226.120:8080/api/auth';
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -50,7 +50,7 @@ export class AuthService {
   }
 
   public loginWithGoogle(): void {
-    window.location.href = 'http://54.206.167.226:8080/api/auth/login/google';
+    window.location.href = 'http://15.135.226.120:8080/api/auth/login/google';
   }
 
   public getProfile(): Observable<any> {

@@ -44,7 +44,7 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 
 		String token = jwtUtil.generateToken(user.getEmail());
 
-		response.sendRedirect("http://54.206.167.226:8080/auth/callback?token=" + token);
+		response.sendRedirect("http://15.135.226.120:8080/auth/callback?token=" + token);
 	}
 
 }

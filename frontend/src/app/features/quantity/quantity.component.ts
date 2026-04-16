@@ -97,7 +97,7 @@ export class QuantityComponent {
       targetUnit: this.convertForm.value.toUnit
     };
 
-    this.http.post<any>('http://54.206.167.226:8080/api/quantity/convert', payload).subscribe({
+    this.http.post<any>('http://15.135.226.120:8080/api/quantity/convert', payload).subscribe({
       next: (res) => {
         this.loading = false;
         this.convertResult = res;
@@ -126,7 +126,7 @@ export class QuantityComponent {
       }
     };
 
-    this.http.post<boolean>('http://54.206.167.226:8080/api/quantity/compare', payload).subscribe({
+    this.http.post<boolean>('http://15.135.226.120:8080/api/quantity/compare', payload).subscribe({
       next: (res) => {
         this.loading = false;
         this.compareResult = res;
@@ -157,7 +157,7 @@ export class QuantityComponent {
 
     const endpoint = this.arithmeticForm.value.operation;
 
-    this.http.post<any>(`http://54.206.167.226:8080/api/quantity/${endpoint}`, payload).subscribe({
+    this.http.post<any>(`http://15.135.226.120:8080/api/quantity/${endpoint}`, payload).subscribe({
       next: (res) => {
         this.loading = false;
         this.arithmeticResult = res;

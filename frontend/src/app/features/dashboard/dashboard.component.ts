@@ -17,11 +17,11 @@ export class DashboardComponent implements OnInit {
   constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit() {
-    this.http.get<any>('http://54.206.167.226:8080/api/auth/profile').subscribe(res => {
+    this.http.get<any>('http://15.135.226.120:8080/api/auth/profile').subscribe(res => {
       if (res && res.username) this.username = res.username;
     });
 
-    this.http.get<any[]>('http://54.206.167.226:8080/api/quantity/history').subscribe(data => {
+    this.http.get<any[]>('http://15.135.226.120:8080/api/quantity/history').subscribe(data => {
       this.totalConversions = data.length;
       this.recentConversions = data.slice(-5).reverse();
     });

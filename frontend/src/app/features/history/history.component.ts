@@ -24,7 +24,7 @@ export class HistoryComponent implements OnInit {
   }
 
   fetchHistory() {
-    this.http.get<any[]>('http://54.206.167.226:8080/api/quantity/history').subscribe({
+    this.http.get<any[]>('http://15.135.226.120:8080/api/quantity/history').subscribe({
       next: (data) => {
         this.dataSource.data = data.reverse();
         this.dataSource.sort = this.sort;
